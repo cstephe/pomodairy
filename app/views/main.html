@@ -1,0 +1,35 @@
+<div ng-controller="MainCtrl">
+    <div class="well">
+        <h4>{{editBox.title || "New Task"}}</h4>
+        <form ng-submit="addTask()" role="form">
+            <div class="form-group">
+                <label>Name</label>
+                <input required class="form-control" type="text" ng-model="newTask.name">
+            </div>
+            <div class="form-group">
+                <label>Details</label>
+                <textarea class="form-control" ng-model="newTask.details"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Pomodairies</label>
+                <select required class="form-control" ng-model="newTask.pomos">
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">{{editBox.button || "Create"}}</button>
+        </form>
+    </div>
+
+    <div class="well task-container" ng-repeat="task in model.taskList">
+        <div ng-click="editTask(task)" class="task-details">
+            {{task.name}}
+            <div class="badge">{{task.pomos}}</div>
+        </div>
+        <div class="task-actions">
+        <button ng-click="startTask(task)" class="btn btn-default">START</button>
+        <button ng-click="removeTask(task)" class="btn btn-default">KILLL MEE</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
