@@ -1,8 +1,8 @@
- #Pomodairy (working name)
+ # Pomodairy (working name)
   
  Pomodairy's purpose is to provide a web base offline single page app for task and time management.
   
- ######First milestone feature list:
+ ###### First milestone feature list:
  - Task list
  - Pomodary timer
  - Uses Local Storage
