@@ -11,8 +11,8 @@
         <div>
             <nvd3-pie-chart
                     id="timer"
-                    data="timerDisplay"
-                    ng-model="timerDisplay"
+                    data="model.timerDisplay"
+                    ng-model="model.timerDisplay"
                     x="xFunction()"
                     y="yFunction()"
                     donut="true"
@@ -26,6 +26,6 @@
     </div>
 </div>
 <button class="btn btn default" ng-click="toggleTimer()">
-    {{(timerState==='PAUSED' || !timerState) ? 'Start' : 'Pause'}}
+    {{(model.timerState==='PAUSED' || !model.timerState) ? 'Start' : 'Pause'}}
 </button>
 {{model.completed}}
