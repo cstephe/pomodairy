@@ -1,0 +1,31 @@
+<div class="jumbotron">
+    <h2>
+        {{model.current.asMilliseconds() ? "Task Time" : "Break Time"}}
+    </h2>
+
+    <div id="timerContainer">
+        <h1 class="time-digits">
+            <div ng-show="model.current.asMilliseconds()">{{model.current.minutes()}}.{{model.current.seconds()}}</div>
+            <div ng-hide="model.current.asMilliseconds()">{{model.break.minutes()}}.{{model.break.seconds()}}</div>
+        </h1>
+        <div>
+            <nvd3-pie-chart
+                    id="timer"
+                    data="timerDisplay"
+                    ng-model="timerDisplay"
+                    x="xFunction()"
+                    y="yFunction()"
+                    donut="true"
+                    margin="{left:0,top:0,bottom:0,right:0}"
+                    height="300"
+                    width="300"
+                    color="colorFunction()">
+                <svg></svg>
+            </nvd3-pie-chart>
+        </div>
+    </div>
+</div>
+<button class="btn btn default" ng-click="toggleTimer()">
+    {{(timerState==='PAUSED' || !timerState) ? 'Start' : 'Pause'}}
+</button>
+{{model.completed}}

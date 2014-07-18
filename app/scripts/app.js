@@ -13,19 +13,25 @@ angular
         'ngAnimate',
         'ngCookies',
         'ngResource',
-        'ngRoute',
         'ngSanitize',
         'ngTouch',
         'ngStorage',
-        'ui.router'
+        'ui.router',
+        'nvd3ChartDirectives'
     ])
-    .config(function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html',
+    .config(function ($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/tasks');
+        $stateProvider
+            .state('tasks', {
+                url:'/tasks',
+                templateUrl: '../views/tasks.html',
                 controller: 'MainCtrl'
             })
-            .otherwise({
-                redirectTo: '/'
+            .state('timer', {
+                url:'/timer',
+                templateUrl: '../views/timer.html',
+                controller: 'TimerCtrl'
             });
-    });
+
+    })
+    .constant('moment', moment);
