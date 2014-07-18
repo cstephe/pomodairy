@@ -10,8 +10,8 @@
 angular.module('pomodairyApp')
     .service('timerService', function (moment, $interval) {
         var timer;
-        var breakTime = 5;
-        var taskTime = 25;
+        var breakTime = .1;
+        var taskTime = .3;
         var getTimerDisplayData = function () {
             return [
                 {
@@ -40,10 +40,13 @@ angular.module('pomodairyApp')
                         toReturn.model.current.subtract(1, 's');
                         toReturn.model.timerDisplay = getTimerDisplayData();
                     } else if (toReturn.model.break != 0) {
+                        if(toReturn.model.break.asMilliseconds() === moment.duration(breakTime, 'm').asMilliseconds()){
+                            var snd = new Audio("/sounds/bell1.mp3"); // buffers automatically when created
+                            snd.play();
+                        }
                         toReturn.model.break.subtract(1, 's');
                         toReturn.model.timerDisplay = getTimerDisplayData();
                     } else {
-                        alert('done mother fucker');
                         toReturn.model.timerState = null;
                         abandonTimer();
                         toReturn.model.completed = toReturn.model.completed + 1;
