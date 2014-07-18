@@ -59,7 +59,7 @@ angular.module('pomodairyApp')
             $interval.cancel(timer);
             timer = null;
             toReturn.model.current = moment.duration(taskTime, 'm');
-            toReturn.break = moment.duration(breakTime, 'm');
+            toReturn.model.break = moment.duration(breakTime, 'm');
             toReturn.model.timerDisplay = getTimerDisplayData();
         };
         var toReturn = {

@@ -35,7 +35,12 @@ angular.module('pomodairyApp')
         $scope.newTask = task;
 
     };
-  }).service('taskService', ['$localStorage', function($localStorage){
+  })
+    .controller('navController', function($scope, $state){
+        $scope.state = $state;
+        console.log($scope.currentState);
+    })
+    .service('taskService', ['$localStorage', function($localStorage){
         $localStorage.taskList = $localStorage.taskList || [];
         return {
             taskList:$localStorage.taskList
