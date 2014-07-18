@@ -10,8 +10,8 @@
 angular.module('pomodairyApp')
     .service('timerService', function (moment, $interval) {
         var timer;
-        var breakTime = 0.5;
-        var taskTime = 1;
+        var breakTime = 5;
+        var taskTime = 25;
         var getTimerDisplayData = function () {
             return [
                 {

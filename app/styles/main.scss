@@ -108,19 +108,33 @@ svg {
   height: auto;
 }
 
+.jumbotron{
+  padding-right: 0;
+  padding-left: 0;
+}
+
 #timerContainer{
+  position: relative;
   svg{
     display: block;
     margin:auto;
   }
-  position: relative;
-  h1.time-digits{
+  .glyphicon{
+    font-size:2em;
+  }
+  .timer-button{
+    font-size:2em;
     position: absolute;
-    width: 100%;
-    right: 0;
     top: 50%;
     margin: auto;
-    margin-top: -38px;
+    margin-top: -75px;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin-left: -75px;
+  }
+  h1.time-digits{
+
   }
   text-align: center;
 }

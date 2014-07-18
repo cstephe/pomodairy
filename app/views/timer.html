@@ -4,10 +4,13 @@
     </h2>
 
     <div id="timerContainer">
-        <h1 class="time-digits">
-            <div ng-show="model.current.asMilliseconds()">{{model.current.minutes()}}.{{model.current.seconds()}}</div>
-            <div ng-hide="model.current.asMilliseconds()">{{model.break.minutes()}}.{{model.break.seconds()}}</div>
-        </h1>
+        <div class="time-digits">
+            <div class="btn btn-default timer-button" ng-click="toggleTimer()">
+                <div ng-show="model.current.asMilliseconds()">{{model.current.minutes()}}.{{model.current.seconds()}}</div>
+                <div ng-hide="model.current.asMilliseconds()">{{model.break.minutes()}}.{{model.break.seconds()}}</div>
+                <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'pause'}}"></div>
+            </div>
+        </div>
         <div>
             <nvd3-pie-chart
                     id="timer"
@@ -15,7 +18,6 @@
                     ng-model="model.timerDisplay"
                     x="xFunction()"
                     y="yFunction()"
-                    donut="true"
                     margin="{left:0,top:0,bottom:0,right:0}"
                     height="300"
                     width="300"
@@ -25,7 +27,4 @@
         </div>
     </div>
 </div>
-<button class="btn btn default" ng-click="toggleTimer()">
-    {{(model.timerState==='PAUSED' || !model.timerState) ? 'Start' : 'Pause'}}
-</button>
-{{model.completed}}
+Completed: {{model.completed}}
