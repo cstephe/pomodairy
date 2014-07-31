@@ -1,0 +1,12 @@
+<div class="well task-container">
+    <div class="task-details">
+    {{workItem.name}} <div class="badge">{{workItem.completed || 0}}/{{workItem.pomos}}</div>
+    </div>
+    <div class="task-actions">
+        <div class="btn btn-default" ng-click="backLogTask(workItem)">Later</div>
+        <div class="btn btn-success" ng-click="startWorkOnItem(workItem)">Complete</div>
+        <div class="btn btn-primary" ng-click="startWorkOnItem(workItem)">Start</div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+

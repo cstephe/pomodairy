@@ -1,30 +1,47 @@
-<div class="jumbotron">
-    <h2>
-        {{model.current.asMilliseconds() ? "Task Time" : "Break Time"}}
-    </h2>
+<div class="row">
+    <div class="col-md-5 col-sm-6">
+        <div class="well timer-section">
+            <h2>
+                {{model.current.asMilliseconds() ? "Task Time" : "Break Time"}}
+            </h2>
 
-    <div id="timerContainer">
-        <div class="time-digits">
-            <div class="btn btn-default timer-button" ng-click="toggleTimer()">
-                <div ng-show="model.current.asMilliseconds()">{{model.current.minutes()}}.{{model.current.seconds()}}</div>
-                <div ng-hide="model.current.asMilliseconds()">{{model.break.minutes()}}.{{model.break.seconds()}}</div>
-                <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'pause'}}"></div>
+            <h3>{{activeWorkItem.name}}</h3>
+
+            <div id="timerContainer">
+                <div class="time-digits">
+                    <div class="btn btn-default timer-button" ng-click="toggleTimer()">
+                        <div ng-show="model.current.asMilliseconds()">
+                            {{model.current.minutes()}}.{{model.current.seconds()}}
+                        </div>
+                        <div ng-hide="model.current.asMilliseconds()">
+                            {{model.break.minutes()}}.{{model.break.seconds()}}
+                        </div>
+                        <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'pause'}}"></div>
+                    </div>
+                </div>
+                <div>
+                    <nvd3-pie-chart
+                            id="timer"
+                            data="model.timerDisplay"
+                            ng-model="model.timerDisplay"
+                            x="xFunction()"
+                            y="yFunction()"
+                            margin="{left:0,top:0,bottom:0,right:0}"
+                            height="280"
+                            width="280"
+                            color="colorFunction()">
+                        <svg></svg>
+                    </nvd3-pie-chart>
+                </div>
             </div>
+            <button class="btn btn-danger" ng-click="abandonTimer()">Abandon</button>
+            <button class="btn btn-danger" ng-click="completePomo()" ng-show="model.current===0">Complete</button>
+            Completed: {{model.completed}}
         </div>
-        <div>
-            <nvd3-pie-chart
-                    id="timer"
-                    data="model.timerDisplay"
-                    ng-model="model.timerDisplay"
-                    x="xFunction()"
-                    y="yFunction()"
-                    margin="{left:0,top:0,bottom:0,right:0}"
-                    height="300"
-                    width="300"
-                    color="colorFunction()">
-                <svg></svg>
-            </nvd3-pie-chart>
+    </div>
+    <div class="col-md-7 col-sm-6">
+        <div ng-repeat="workItem in workListItems">
+            <ng-include src="'views/workItem.html'"></ng-include>
         </div>
     </div>
 </div>
-Completed: {{model.completed}}
