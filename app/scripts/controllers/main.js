@@ -4,10 +4,14 @@
         .controller('navController', ['$scope', '$state', function ($scope, $state) {
             $scope.state = $state;
         }])
+        .controller('SettingsCtrl', [function(){
+
+        }])
         .controller('MainCtrl', function ($scope, _, modelService, uuid) {
             $scope.model = {
                 taskList: modelService.taskList
             };
+            $scope.newTask = {};
             var clear = function () {
                 $scope.newTask = {};
                 $scope.editBox = null;

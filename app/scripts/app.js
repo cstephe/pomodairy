@@ -25,6 +25,11 @@ angular.module('pomodairyApp', [
             url: '/timer',
             templateUrl: '../views/timer.html',
             controller: 'TimerCtrl'
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: '../views/settings.html',
+            controller: 'SettingsCtrl'
         });
 })
 .constant('moment', moment)

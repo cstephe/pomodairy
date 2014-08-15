@@ -2,27 +2,29 @@
 (function (window, angular) {
     angular.module('core.entities', [])
         .factory("uuid", [function () {
-        return {
-            newuuid: function () {
-                // http://www.ietf.org/rfc/rfc4122.txt
-                var s = [];
-                var hexDigits = "0123456789abcdef";
-                for (var i = 0; i < 36; i++) {
-                    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            return {
+                newuuid: function () {
+                    // http://www.ietf.org/rfc/rfc4122.txt
+                    var s = [];
+                    var hexDigits = "0123456789abcdef";
+                    for (var i = 0; i < 36; i++) {
+                        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                    }
+                    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+                    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                    s[8] = s[13] = s[18] = s[23] = "-";
+                    return s.join("");
                 }
-                s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
-                s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-                s[8] = s[13] = s[18] = s[23] = "-";
-                return s.join("");
             }
-        }
-    }])
+        }])
         .service('modelService', ['$localStorage', function ($localStorage) {
             $localStorage.taskList = $localStorage.taskList || [];
             $localStorage.workList = $localStorage.workList || [];
+            $localStorage.totalCompleted = $localStorage.totalCompleted || [];
             var modelService = {
                 taskList: $localStorage.taskList,
                 workList: $localStorage.workList,
+                totalCompleted: $localStorage.totalCompleted,
                 getWorkListItems: function () {
                     var toReturn = [];
                     angular.forEach(modelService.workList, function (item) {
@@ -33,14 +35,14 @@
                 getTaskItemById: function (id) {
                     return _.findWhere(modelService.taskList, {id: id});
                 },
-                removeFromWorkList : function(id){
+                removeFromWorkList: function (id) {
                     var workIndex = modelService.workList.indexOf(id);
                     modelService.workList.splice(workIndex, 1);
                 }
             };
             return modelService;
         }])
-        .service('timerService', ['moment', '$interval', function (moment, $interval) {
+        .service('timerService', ['moment', '$interval', 'modelService', function (moment, $interval, modelService) {
             var timer;
             var breakTime = .1;
             var taskTime = .3;
@@ -106,7 +108,7 @@
                     current: moment.duration(taskTime, 'm'),
                     break: moment.duration(breakTime, 'm'),
                     task: [],
-                    completed: 0,
+                    totalCompleted: modelService.totalCompleted,
                     timerDisplay: {}
                 },
                 activeItemId: null,

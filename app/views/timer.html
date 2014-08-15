@@ -35,13 +35,12 @@
                 </div>
             </div>
             <button class="btn btn-danger" ng-click="abandonTimer()">Abandon</button>
-            <button class="btn btn-danger" ng-click="completePomo()" ng-show="model.current===0">Complete</button>
-            Completed: {{model.completed}}
+            <button class="btn btn-success" ng-show="showComplete" ng-click="completePomo()">Complete</button>
         </div>
+        <div>Completed Today: {{completedToday()}}</div>
+        <div>Completed Total: {{model.totalCompleted.length}}</div>
     </div>
     <div class="col-md-7 col-sm-6">
-        <div ng-repeat="workItem in workListItems">
-            <ng-include src="'views/workItem.html'"></ng-include>
-        </div>
+        <ng-include src="'views/workItem.html'" ng-repeat="workItem in workListItems | orderBy:worklistOrder"></ng-include>
     </div>
 </div>

@@ -1,6 +1,7 @@
-<div class="well task-container">
+<div class="well task-container" ng-class="{'active-task':workItem.active}">
     <div class="task-details">
-    {{workItem.name}} <div class="badge">{{workItem.completed || 0}}/{{workItem.pomos}}</div>
+   <div class="badge">{{workItem.completed || 0}}/{{workItem.pomos || 0}}</div>
+        {{workItem.name}}
     </div>
     <div class="task-actions">
         <div class="btn btn-default" ng-click="backLogTask(workItem)">Later</div>
