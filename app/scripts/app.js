@@ -14,16 +14,16 @@ angular.module('pomodairyApp', [
     'timerModule'
 ])
 .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/tasks');
+    $urlRouterProvider.otherwise('/today');
     $stateProvider
         .state('tasks', {
             url: '/tasks',
             templateUrl: '../views/tasks.html',
             controller: 'MainCtrl'
         })
-        .state('timer', {
-            url: '/timer',
-            templateUrl: '../views/timer.html',
+        .state('today', {
+            url: '/today',
+            templateUrl: '../views/todayPage.html',
             controller: 'TimerCtrl'
         })
         .state('settings', {

@@ -1,7 +1,7 @@
+<form ng-submit="addTask()" role="form">
 <div class="well">
     <h4>{{editBox.title || "New Task"}}</h4>
 
-    <form ng-submit="addTask()" role="form">
         <div class="form-group">
             <label>Name</label>
             <input required class="form-control" type="text" ng-model="newTask.name">
@@ -22,5 +22,5 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">{{editBox.button || "Create"}}</button>
-    </form>
 </div>
+</form>

@@ -1,11 +1,19 @@
 'use strict';
 (function (window, angular) {
     angular.module('timerModule', [])
-        .controller('TimerCtrl', ['$scope', '$stateParams', 'timerService', 'modelService', 'applicationState', 'moment',
-            function ($scope, $stateParams, timerService, modelService, applicationState, moment) {
+        .controller('TimerCtrl', ['$scope', '$stateParams', 'timerService', 'modelService', 'applicationState', 'moment', '_',
+            function ($scope, $stateParams, timerService, modelService, applicationState, moment, _) {
                 $scope.workListItems = modelService.getWorkListItems();
                 $scope.activeWorkItem = modelService.getTaskItemById(applicationState.activeItemId);
                 $scope.model = timerService.model;
+                $scope.timeLeft = function(){
+                    var pomos = _.reduce($scope.workListItems, function(memo, item){
+                        return memo + ((+item.pomos || 0) - (+item.completed || 0));
+                    }, 0);
+                    var worktime = pomos * 25;
+                    var breaktime = (pomos/4) * 30;
+                    return moment.duration(worktime + breaktime, 'm').humanize();
+                };
                 $scope.completedToday = function () {
                     var toReturn = 0;
                     var today = moment().startOf('day');

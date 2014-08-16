@@ -2,13 +2,24 @@
     <div class="col-md-5 col-sm-6" ng-include="'views/newTask.html'"></div>
     <div class="col-md-7 col-sm-6">
         <div class="well task-container" ng-repeat="task in model.taskList">
-            <div ng-click="editTask(task)" class="task-details">
+            <div class="task-details">
                 <div class="badge">{{task.pomos}}</div>
                 {{task.name}}
             </div>
             <div class="task-actions">
-                <button ng-click="removeTask(task)" class="btn btn-danger">Remove</button>
-                <button ng-click="workTask(task)" class="btn btn-primary" ng-disabled="inWorkList(task)">Work</button>
+                <div class="btn-group">
+                    <button  type="button" ng-click="workTask(task)" class="btn btn-primary" ng-disabled="inWorkList(task)">Work</button>
+                    <button  type="button" class="btn btn-primary" ng-if="workItem.active"
+                             ng-click="startWorkOnItem(workItem)">Complete</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a ng-click="editTask(task)">Edit</a></li>
+                        <li><a ng-click="removeTask(task)">Remove</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>

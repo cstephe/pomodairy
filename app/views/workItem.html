@@ -4,10 +4,20 @@
         {{workItem.name}}
     </div>
     <div class="task-actions">
-        <div class="btn btn-default" ng-click="backLogTask(workItem)">Later</div>
-        <div class="btn btn-success" ng-click="startWorkOnItem(workItem)">Complete</div>
-        <div class="btn btn-primary" ng-click="startWorkOnItem(workItem)">Start</div>
+        <div class="btn-group">
+            <button  type="button" class="btn btn-primary" ng-if="!workItem.active"
+                     ng-click="startWorkOnItem(workItem)">Start</button>
+            <button  type="button" class="btn btn-primary" ng-if="workItem.active"
+                     ng-click="startWorkOnItem(workItem)">Complete</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a ng-click="backLogTask(workItem)">Later</a></li>
+                <li><a ng-hide="workItem.active" ng-click="startWorkOnItem(workItem)">Complete</a></li>
+            </ul>
+        </div>
     </div>
     <div class="clearfix"></div>
 </div>
-

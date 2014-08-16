@@ -1,9 +1,12 @@
 'use strict';
 (function (window, angular) {
     angular.module('taskListModule', [])
-        .controller('navController', ['$scope', '$state', function ($scope, $state) {
-            $scope.state = $state;
-        }])
+        .controller('navController', ['$scope', '$state', 'modelService',
+            function ($scope, $state, modelService) {
+                $scope.state = $state;
+                $scope.model = modelService;
+            }
+        ])
         .controller('SettingsCtrl', [function(){
 
         }])
