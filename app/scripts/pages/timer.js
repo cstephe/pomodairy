@@ -3,6 +3,7 @@
     angular.module('timerModule', [])
         .controller('TimerCtrl', ['$scope', '$stateParams', 'timerService', 'modelService', 'applicationState', 'moment', '_',
             function ($scope, $stateParams, timerService, modelService, applicationState, moment, _) {
+                timerService.setPomoLength(applicationState.pomoLength);
                 $scope.workListItems = modelService.getWorkListItems();
                 $scope.activeWorkItem = modelService.getTaskItemById(applicationState.activeItemId);
                 $scope.model = timerService.model;
@@ -10,7 +11,7 @@
                     var pomos = _.reduce($scope.workListItems, function(memo, item){
                         return memo + ((+item.pomos || 0) - (+item.completed || 0));
                     }, 0);
-                    var worktime = pomos * 25;
+                    var worktime = pomos * applicationState.pomoLength;
                     var breaktime = (pomos/4) * 30;
                     return moment.duration(worktime + breaktime, 'm').humanize();
                 };
@@ -23,7 +24,7 @@
                             toReturn++;
                         } else {
                             x = 0;
-                            console.log("stopping");
+//                            console.log("stopping");
                         }
                     }
                     return toReturn;

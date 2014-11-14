@@ -7,8 +7,13 @@
                 $scope.model = modelService;
             }
         ])
-        .controller('SettingsCtrl', [function(){
+        .controller('SettingsCtrl', ['$scope', 'modelService', function($scope, modelService){
+            $scope.model= modelService.settings;
+            $scope.restoreDefaults = function(){
+//                modelService.settings = null;
+//                modelService.reload();
 
+            }
         }])
         .controller('MainCtrl', function ($scope, _, modelService, uuid) {
             $scope.model = {
@@ -30,13 +35,26 @@
                 }
                 clear();
             };
+            $scope.taskOrder = function(item){
+                if(inWorkList(item)){
+                    return "2"+item.name;
+                }else{
+                    return "1" +item.name;
+                }
+            };
             $scope.inWorkList = inWorkList;
+            $scope.notInWorkList = function(item){return !inWorkList(item);};
             $scope.workTask = function (task) {
                 if (!inWorkList(task)) {
                     modelService.workList.push(task.id);
                 }
             };
-
+            $scope.delayTask = function(task){
+                console.log("delaying?");
+                console.log(task);
+                var workIndex = modelService.workList.indexOf(task.id);
+                modelService.workList.splice(workIndex, 1);
+            };
             $scope.removeTask = function (task) {
                 var index = modelService.taskList.indexOf(task);
                 modelService.taskList.splice(index, 1);

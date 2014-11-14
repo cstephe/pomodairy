@@ -112,7 +112,9 @@ svg {
   padding-right: 0;
   padding-left: 0;
 }
-
+.footer{
+  margin-top:20px;
+}
 #timerContainer{
   position: relative;
   svg{
@@ -146,4 +148,8 @@ svg {
 .active-task{
   margin-bottom: 50px;
   background-color: rgba(184, 255, 170, 0.82);
+}
+
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
 }

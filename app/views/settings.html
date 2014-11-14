@@ -1,12 +1,20 @@
 <form>
+    <h2>Pomodairy Settings</h2>
     <div class="checkbox">
         <label>
             <input ng-model="model.strict" type="checkbox"> Strict Mode
         </label>
     </div>
+    <div ng-show="!model.strict">
+        pomo length: <input type="number" ng-model="model.pomoLength">
+        break length: <input type="number" ng-model="model.breakLength">
+    </div>
+
+    <h2>System</h2>
     <div class="checkbox">
         <label>
             <input ng-model="model.cloudEnabled" type="checkbox"> Sync Tasks
         </label>
     </div>
+    <button class="btn btn-default" ng-click="restoreDefaults()">Reset to defaults</button>
 </form>

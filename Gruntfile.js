@@ -24,6 +24,9 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    ngdocs: {
+      all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
+    },
     // Project settings
     yeoman: appConfig,
 
@@ -163,7 +166,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
-        cwd: '<%= yeoman.app %>'
+        cwd: ''
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -385,11 +388,12 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: 'karma.conf.js',
         singleRun: true
       }
     }
   });
+
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {

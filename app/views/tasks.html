@@ -1,27 +1,17 @@
 <div class="row">
     <div class="col-md-5 col-sm-6" ng-include="'views/newTask.html'"></div>
     <div class="col-md-7 col-sm-6">
-        <div class="well task-container" ng-repeat="task in model.taskList">
-            <div class="task-details">
-                <div class="badge">{{task.pomos}}</div>
-                {{task.name}}
-            </div>
-            <div class="task-actions">
-                <div class="btn-group">
-                    <button  type="button" ng-click="workTask(task)" class="btn btn-primary" ng-disabled="inWorkList(task)">Work</button>
-                    <button  type="button" class="btn btn-primary" ng-if="workItem.active"
-                             ng-click="startWorkOnItem(workItem)">Complete</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li><a ng-click="editTask(task)">Edit</a></li>
-                        <li><a ng-click="removeTask(task)">Remove</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="clearfix"></div>
+        <h3>Inventory</h3>
+        <ng-include src="'views/inventoryItem.html'" ng-repeat="task in inventoryItems = (model.taskList | filter:notInWorkList)">
+        </ng-include>
+        <div class="jumbotron" ng-show="inventoryItems.length < 1">
+            No Items In Your Inventory
+        </div>
+        <h3>Working</h3>
+        <ng-include src="'views/inventoryItem.html'" ng-repeat="task in workingItems = (model.taskList | filter:inWorkList)">
+        </ng-include>
+        <div class="jumbotron" ng-show="workingItems.length < 1">
+            No Working Items For The Day
         </div>
     </div>
 </div>

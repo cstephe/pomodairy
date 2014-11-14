@@ -10,6 +10,7 @@ angular.module('pomodairyApp', [
     'ui.router',
     'nvd3ChartDirectives',
     'core.entities',
+    'pomodary.entities',
     'taskListModule',
     'timerModule'
 ])
