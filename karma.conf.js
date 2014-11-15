@@ -4,30 +4,45 @@
 module.exports = function(config) {
   config.set({
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: './',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
+      // bower:js
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/es5-shim/es5-shim.js',
       'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-sanitize/angular-sanitize.js',
-      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/json3/lib/json3.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
       'bower_components/angular-resource/angular-resource.js',
-      'bower_components/moment/moment.js',
-      'bower_components/underscore/underscore.js',
-      'bower_components/ngstorage/ngStorage.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/ngstorage/ngStorage.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/moment/moment.js',
       'bower_components/d3/d3.js',
       'bower_components/nvd3/nv.d3.js',
-      'bower_components/json3/lib/json3.js',
-      'bower_components/json3/lib/json3.js',
-      'bower_components/jquery/dist/jquery.js',
       'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
+      'bower_components/howler.js/howler.js',
+      'bower_components/underscore/underscore.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      // endbower
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
