@@ -1,8 +1,7 @@
 <div class="well timer-section">
     <h2>
-        {{model.current.asMilliseconds() ? "Task Time" : "Break Time"}}
+        {{model.current.asMilliseconds() ? (activeWorkItem.name || "Task Time") : "Break Time"}}
     </h2>
-    <h3>{{activeWorkItem.name}}</h3>
     <div id="timerContainer">
         <div class="time-digits">
             <div class="btn btn-default timer-button" ng-click="toggleTimer()">

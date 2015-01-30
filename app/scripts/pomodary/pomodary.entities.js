@@ -177,8 +177,10 @@
         };
         var toReturn = {
           setPomoLength: function (pomoLength) {
-            taskTime = pomoLength;
-            setupModel();
+            if(taskTime !== pomoLength){
+              taskTime = pomoLength;
+              setupModel();
+            }
           },
           model : null,
           activeItemId: null,
