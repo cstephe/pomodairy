@@ -103,7 +103,7 @@
     .service('timerService', ['moment', '$interval', 'modelService',
       function (moment, $interval, modelService) {
         var timer;
-        var breakTime = modelService.settings.breakLength;
+        var breakTime = modelService.settings.breakLength || 5;
         var taskTime = 25;
         var getTimerDisplayData = function () {
           var toSet = [];
@@ -171,9 +171,9 @@
             current: moment.duration(taskTime, 'm'),
             break: moment.duration(breakTime, 'm'),
             task: [],
-            timerDisplay : getTimerDisplayData(),
             totalCompleted: modelService.totalCompleted
           };
+          toReturn.model.timerDisplay = getTimerDisplayData();
         };
         var toReturn = {
           setPomoLength: function (pomoLength) {
