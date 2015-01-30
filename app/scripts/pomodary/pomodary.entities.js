@@ -131,32 +131,35 @@
         };
         var toggle = function () {
           if (!timer) {
-            toReturn.model.timerState = "STARTED";
-            timer = $interval(function () {
-              if (toReturn.model.current > 0) {
-                toReturn.model.current.subtract(1, 's');
-                toReturn.model.timerDisplay = getTimerDisplayData();
-              } else if (toReturn.model.break > 0) {
-                if (toReturn.model.break.asMilliseconds() === moment.duration(breakTime, 'm').asMilliseconds()) {
-                  var snd = new Howl({
-                    urls: ["/sounds/bell1.mp3"]
-                  }).play();
-                }
-                toReturn.model.break.subtract(1, 's');
-                toReturn.model.timerDisplay = getTimerDisplayData();
-              } else {
-                toReturn.model.timerState = null;
-                if (toReturn.onPomoCompleted) {
-                  toReturn.onPomoCompleted();
-                }
-              }
-            }, 1000);
+            startTimer();
           } else {
-            toReturn.model.timerState = "PAUSED";
-            $interval.cancel(timer);
-            timer = null;
+            abandonTimer();
           }
         };
+        var startTimer = function(){
+          toReturn.model.timerState = "STARTED";
+          toReturn.model.timeStart = moment();
+          timer = $interval(function () {
+            if (toReturn.model.current > 0) {
+              toReturn.model.current=moment.duration(taskTime, 'm')
+                .subtract(moment()-toReturn.model.timeStart, 'ms');
+              toReturn.model.timerDisplay = getTimerDisplayData();
+            } else if (toReturn.model.break > 0) {
+              if (toReturn.model.break.asMilliseconds() === moment.duration(breakTime, 'm').asMilliseconds()) {
+                var snd = new Howl({
+                  urls: ["/sounds/bell1.mp3"]
+                }).play();
+              }
+              toReturn.model.break.subtract(1, 's');
+              toReturn.model.timerDisplay = getTimerDisplayData();
+            } else {
+              toReturn.model.timerState = null;
+              if (toReturn.onPomoCompleted) {
+                toReturn.onPomoCompleted();
+              }
+            }
+          }, 500);
+        }
         var abandonTimer = function () {
           toReturn.model.timerState = "PAUSED";
           $interval.cancel(timer);

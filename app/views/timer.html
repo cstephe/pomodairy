@@ -1,18 +1,18 @@
-<div class="well timer-section">
+<div class="well timer-section" ng-class="{'no-active-task':!activeWorkItem}">
     <h2>
-        {{model.current.asMilliseconds() ? (activeWorkItem.name || "Task Time") : "Break Time"}}
+        {{model.current.asMilliseconds() ? (activeWorkItem.name || "No Assigned Task") : "Break Time"}}
     </h2>
     <div id="timerContainer">
         <div class="time-digits">
-            <div class="btn btn-default timer-button" ng-click="toggleTimer()">
+            <button class="btn btn-default timer-button" ng-disabled="!activeWorkItem" ng-click="toggleTimer()">
                 <div ng-show="model.current.asMilliseconds()">
                     {{model.current.minutes()}}.{{model.current.seconds()}}
                 </div>
                 <div ng-hide="model.current.asMilliseconds()">
                     {{model.break.minutes()}}.{{model.break.seconds()}}
                 </div>
-                <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'pause'}}"></div>
-            </div>
+                <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'stop'}}"></div>
+            </button>
         </div>
         <div>
             <nvd3-pie-chart
@@ -29,6 +29,5 @@
             </nvd3-pie-chart>
         </div>
     </div>
-    <button class="btn btn-danger" ng-click="abandonTimer()">Abandon</button>
     <button class="btn btn-success" ng-show="showComplete" ng-click="completePomo()">Complete</button>
 </div>

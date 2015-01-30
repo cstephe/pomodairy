@@ -1,7 +1,9 @@
+@import "bootswatch-scss/lumen/variables";
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+@import "bootswatch-scss/lumen/bootswatch";
 
 .browsehappy {
   margin: 0.2em 0;
@@ -59,6 +61,14 @@ body {
   }
 }
 
+.btn.timer-button, {
+  border-width: 1px;
+}
+.no-active-task{
+  .nv-slice{
+    fill:grey;
+  }
+}
 /* Supporting marketing content */
 .marketing {
   margin: 40px 0;
@@ -125,6 +135,10 @@ svg {
     font-size:2em;
   }
   .timer-button{
+    &:focus, &:active{
+      outline:none;
+      box-shadow: 0px 0px 3pt 2pt red;
+    }
     font-size:2em;
     position: absolute;
     top: 50%;

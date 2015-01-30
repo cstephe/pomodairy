@@ -50,8 +50,6 @@
                 }
             };
             $scope.delayTask = function(task){
-                console.log("delaying?");
-                console.log(task);
                 var workIndex = modelService.workList.indexOf(task.id);
                 modelService.workList.splice(workIndex, 1);
             };

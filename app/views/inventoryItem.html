@@ -8,11 +8,11 @@
             <button  type="button"
                      ng-click="workTask(task)"
                      ng-if="notInWorkList(task)"
-                     class="btn btn-primary">Today</button>
+                     class="btn btn-primary">For Today</button>
             <button  type="button"
                      class="btn btn-primary"
                      ng-show="inWorkList(task)"
-                     ng-click="delayTask(task)">Later</button>
+                     ng-click="delayTask(task)">For Later</button>
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
