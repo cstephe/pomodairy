@@ -15,7 +15,7 @@
 
             }
         }])
-        .controller('MainCtrl', function ($scope, _, modelService, uuid) {
+        .controller('MainCtrl', ['$scope', '_', 'modelService', 'uuid', function ($scope, _, modelService, uuid) {
             $scope.model = {
                 taskList: modelService.taskList
             };
@@ -66,5 +66,5 @@
                 $scope.editBox = {title: "Edit Task", button: "Done"};
                 $scope.newTask = task;
             };
-        });
+        }]);
 })(window, window.angular);

@@ -140,9 +140,10 @@
           toReturn.model.timerState = "STARTED";
           toReturn.model.timeStart = moment();
           timer = $interval(function () {
+            var toSubtract = moment()-toReturn.model.timeStart;
             if (toReturn.model.current > 0) {
               toReturn.model.current=moment.duration(taskTime, 'm')
-                .subtract(moment()-toReturn.model.timeStart, 'ms');
+                .subtract(toSubtract, 'ms');
               toReturn.model.timerDisplay = getTimerDisplayData();
             } else if (toReturn.model.break > 0) {
               if (toReturn.model.break.asMilliseconds() === moment.duration(breakTime, 'm').asMilliseconds()) {
@@ -150,7 +151,8 @@
                   urls: ["/sounds/bell1.mp3"]
                 }).play();
               }
-              toReturn.model.break.subtract(1, 's');
+              toReturn.model.break=moment.duration(breakTime, 'm')
+                .subtract(toSubtract, 'ms');
               toReturn.model.timerDisplay = getTimerDisplayData();
             } else {
               toReturn.model.timerState = null;

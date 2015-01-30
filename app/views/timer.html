@@ -1,14 +1,14 @@
 <div class="well timer-section" ng-class="{'no-active-task':!activeWorkItem}">
     <h2>
-        {{model.current.asMilliseconds() ? (activeWorkItem.name || "No Assigned Task") : "Break Time"}}
+        {{model.current.asMilliseconds()>0 ? (activeWorkItem.name || "No Assigned Task") : "Break Time"}}
     </h2>
     <div id="timerContainer">
         <div class="time-digits">
             <button class="btn btn-default timer-button" ng-disabled="!activeWorkItem" ng-click="toggleTimer()">
-                <div ng-show="model.current.asMilliseconds()">
+                <div ng-show="model.current.asMilliseconds() > 0">
                     {{model.current.minutes()}}.{{model.current.seconds()}}
                 </div>
-                <div ng-hide="model.current.asMilliseconds()">
+                <div ng-hide="model.current.asMilliseconds() > 0">
                     {{model.break.minutes()}}.{{model.break.seconds()}}
                 </div>
                 <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'stop'}}"></div>

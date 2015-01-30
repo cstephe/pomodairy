@@ -14,7 +14,7 @@ angular.module('pomodairyApp', [
     'taskListModule',
     'timerModule'
 ])
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/today');
     $stateProvider
         .state('tasks', {
@@ -32,6 +32,6 @@ angular.module('pomodairyApp', [
             templateUrl: '../views/settings.html',
             controller: 'SettingsCtrl'
         });
-})
+}])
 .constant('moment', moment)
 .constant('_', _);

@@ -18,7 +18,6 @@
       }
     }])
     .service('applicationState', ['modelService', function (modelService) {
-      console.log(modelService.settings.pomoLength);
       var appState = {
         activeItem: null,
         pomoLength: modelService.settings.pomoLength,
