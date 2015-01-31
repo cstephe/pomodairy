@@ -139,6 +139,8 @@
         var startTimer = function(){
           toReturn.model.timerState = "STARTED";
           toReturn.model.timeStart = moment();
+          //set this in case in changed
+          taskTime = modelService.settings.pomoLength;
           timer = $interval(function () {
             var toSubtract = moment()-toReturn.model.timeStart;
             if (toReturn.model.current > 0) {
@@ -161,11 +163,13 @@
               }
             }
           }, 500);
-        }
+        };
         var abandonTimer = function () {
           toReturn.model.timerState = "PAUSED";
           $interval.cancel(timer);
           timer = null;
+          //set this in case in changed
+          taskTime = modelService.settings.pomoLength;
           toReturn.model.current = moment.duration(taskTime, 'm');
           toReturn.model.break = moment.duration(breakTime, 'm');
           toReturn.model.timerDisplay = getTimerDisplayData();

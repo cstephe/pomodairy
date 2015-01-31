@@ -7,3 +7,9 @@ bower_components
 .idea
 docs
 coverage
+mobileAppShell/www
+mobileAppShell/platforms
+mobileAppShell/plugins
+# built application files
+*.apk
+*.ap_

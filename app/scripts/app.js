@@ -19,17 +19,17 @@ angular.module('pomodairyApp', [
     $stateProvider
         .state('tasks', {
             url: '/tasks',
-            templateUrl: '../views/tasks.html',
+            templateUrl: 'views/tasks.html',
             controller: 'MainCtrl'
         })
         .state('today', {
             url: '/today',
-            templateUrl: '../views/todayPage.html',
+            templateUrl: 'views/todayPage.html',
             controller: 'TimerCtrl'
         })
         .state('settings', {
             url: '/settings',
-            templateUrl: '../views/settings.html',
+            templateUrl: 'views/settings.html',
             controller: 'SettingsCtrl'
         });
 }])

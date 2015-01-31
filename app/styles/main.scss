@@ -1,9 +1,9 @@
-@import "bootswatch-scss/lumen/variables";
+@import "bootswatch-scss/slate/variables";
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
-@import "bootswatch-scss/lumen/bootswatch";
+@import "bootswatch-scss/slate/bootswatch";
 
 .browsehappy {
   margin: 0.2em 0;
@@ -14,7 +14,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
   min-width: 320px;
 }
@@ -161,7 +160,7 @@ svg {
 
 .active-task{
   margin-bottom: 50px;
-  background-color: rgba(184, 255, 170, 0.82);
+  background-color: rgba(8, 37, 3, 0.82)
 }
 
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
