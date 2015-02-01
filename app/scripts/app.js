@@ -7,6 +7,7 @@ angular.module('pomodairyApp', [
     'ngSanitize',
     'ngTouch',
     'ngStorage',
+    'ngMaterial',
     'ui.router',
     'nvd3ChartDirectives',
     'core.entities',
@@ -14,7 +15,7 @@ angular.module('pomodairyApp', [
     'taskListModule',
     'timerModule'
 ])
-.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
     $urlRouterProvider.otherwise('/today');
     $stateProvider
         .state('tasks', {
@@ -32,6 +33,30 @@ angular.module('pomodairyApp', [
             templateUrl: 'views/settings.html',
             controller: 'SettingsCtrl'
         });
+    $mdThemingProvider.theme('default')
+      .primaryPalette('light-blue')
+      .accentPalette('blue');
 }])
 .constant('moment', moment)
 .constant('_', _);
+/*
+ red
+ pink
+ purple
+ deep-purple
+ indigo
+ blue
+ light-blue
+ cyan
+ teal
+ green
+ light-green
+ lime
+ yellow
+ amber
+ orange
+ deep-orange
+ brown
+ grey
+ blue-grey
+ */

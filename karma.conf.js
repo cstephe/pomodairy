@@ -30,6 +30,8 @@ module.exports = function(config) {
       'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
       'bower_components/howler.js/howler.js',
       'bower_components/underscore/underscore.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/*.js',

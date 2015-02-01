@@ -1,19 +1,22 @@
+<md-content class="md-padding">
 <form>
-    <div class="checkbox">
-        <label>
-            <input ng-model="model.strict" type="checkbox"> Strict Mode
-        </label>
-    </div>
-    <div ng-show="!model.strict">
-        pomo length: <input type="number" ng-model="model.pomoLength">
-        break length: <input type="number" ng-model="model.breakLength">
-    </div>
-
-    <h2>System</h2>
-    <div class="checkbox">
-        <label>
-            <input ng-model="model.cloudEnabled" type="checkbox"> Sync Tasks
-        </label>
-    </div>
-    <button class="btn btn-default" ng-click="restoreDefaults()">Reset to defaults</button>
+  <md-checkbox ng-model="model.strict" aria-label="Finished?">
+    Strict Mode
+  </md-checkbox>
+  <md-input-container>
+    <label> Pomo Length</label>
+    <input type="number" ng-model="model.pomoLength" required ng-disabled="model.strict">
+  </md-input-container>
+  <md-input-container>
+    <label> Short Break Length</label>
+    <input type="number" ng-model="model.breakLength" required ng-disabled="model.strict">
+  </md-input-container>
+  <md-input-container>
+    <label> Long Break Length</label>
+    <input type="number" ng-model="model.longBreakLength" required ng-disabled="model.strict">
+  </md-input-container>
+  <md-checkbox ng-model="model.cloudEnabled" aria-label="Finished?">
+    Sync Tasks
+  </md-checkbox>
 </form>
+</md-content>

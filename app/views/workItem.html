@@ -1,23 +1,21 @@
-<div class="well task-container" ng-class="{'active-task':workItem.active}">
-    <div class="task-details">
-   <div class="badge">{{workItem.completed || 0}}/{{workItem.pomos || 0}}</div>
-        {{workItem.name}}
+<div layout="row" flex class="md-tile-content" ng-class="{'active-task':workItem.active}">
+  <div flex class="task-details">
+    <span class="badge">{{workItem.completed || 0}}/{{workItem.pomos || 0}}</span>
+    <span>{{workItem.name}}</span>
+  </div>
+  <div class="task-actions md-tile-right">
+    <div class="btn-group">
+      <md-button type="button" class="md-raised md-primary"
+              ng-click="startWorkOnItem(workItem)">{{!workItem.active?'Work':'Complete'}}
+      </md-button>
+      <md-button type="button" class="md-raised md-primary md-button-attached dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </md-button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li><a ng-click="backLogTask(workItem)">Later</a></li>
+        <li><a ng-hide="workItem.active" ng-click="startWorkOnItem(workItem)">Complete</a></li>
+      </ul>
     </div>
-    <div class="task-actions">
-        <div class="btn-group">
-            <button  type="button" class="btn btn-primary" ng-if="!workItem.active"
-                     ng-click="startWorkOnItem(workItem)">Work</button>
-            <button  type="button" class="btn btn-primary" ng-if="workItem.active"
-                     ng-click="startWorkOnItem(workItem)">Complete</button>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                <li><a ng-click="backLogTask(workItem)">Later</a></li>
-                <li><a ng-hide="workItem.active" ng-click="startWorkOnItem(workItem)">Complete</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="clearfix"></div>
+  </div>
 </div>

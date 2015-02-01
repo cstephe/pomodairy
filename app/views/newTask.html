@@ -1,26 +1,35 @@
-<form ng-submit="addTask()" role="form">
-    <h3>{{editBox.title || "New Task"}}</h3>
-    <div class="well">
-        <div class="form-group">
-            <label>Name</label>
-            <input required class="form-control" type="text" ng-model="newTask.name">
-        </div>
-        <div class="form-group">
-            <label>Pomodairies</label>
-            <select required class="form-control" ng-model="newTask.pomos">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary" ng-show="!editBox.button">Add</button>
-        <button type="submit" class="btn btn-primary" ng-show="editBox.button">Finish</button>
+<div layout="column">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      {{editBox.title || "New Task"}}
+    </div>
+  </md-toolbar>
+  <div flex layout-margin>
+    <form ng-submit="addTask()" role="form">
+      <md-input-container>
+        <label>Name</label>
+        <input required type="text" ng-model="newTask.name">
+      </md-input-container>
+      <label>Pomodairies</label>
+      <md-input-container>
+        <select required ng-model="newTask.pomos">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
+      </md-input-container>
+      <div layout="row">
+        <div flex></div>
+        <md-button type="submit" class="md-raised md-primary" ng-show="!editBox.button">Add</md-button>
+        <md-button type="submit" class="md-raised md-primary" ng-show="editBox.button">Finish</md-button>
+      </div>
+    </form>
+  </div>
 </div>
-</form>

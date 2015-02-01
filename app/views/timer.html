@@ -1,33 +1,35 @@
-<div class="well timer-section" ng-class="{'no-active-task':!activeWorkItem}">
-    <h2>
+<div class="timer-section" ng-class="{'no-active-task':!activeWorkItem}">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
         {{model.current.asMilliseconds()>0 ? (activeWorkItem.name || "No Assigned Task") : "Break Time"}}
-    </h2>
-    <div id="timerContainer">
-        <div class="time-digits">
-            <button class="btn btn-default timer-button" ng-disabled="!activeWorkItem" ng-click="toggleTimer()">
-                <div ng-show="model.current.asMilliseconds() > 0">
-                    {{model.current.minutes()}}.{{model.current.seconds()}}
-                </div>
-                <div ng-hide="model.current.asMilliseconds() > 0">
-                    {{model.break.minutes()}}.{{model.break.seconds()}}
-                </div>
-                <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'stop'}}"></div>
-            </button>
-        </div>
-        <div>
-            <nvd3-pie-chart
-                    id="timer"
-                    data="model.timerDisplay"
-                    ng-model="model.timerDisplay"
-                    x="xFunction()"
-                    y="yFunction()"
-                    margin="{left:0,top:0,bottom:0,right:0}"
-                    height="280"
-                    width="280"
-                    color="colorFunction()">
-                <svg></svg>
-            </nvd3-pie-chart>
-        </div>
     </div>
-    <button class="btn btn-success" ng-show="showComplete" ng-click="completePomo()">Complete</button>
+  </md-toolbar>
+  <div id="timerContainer" layout="column">
+    <div class="time-digits">
+      <md-button class="md-fab md-accent timer-button" ng-disabled="!activeWorkItem" ng-click="toggleTimer()">
+        <div ng-show="model.current.asMilliseconds() > 0">
+          {{model.current.minutes()}}.{{model.current.seconds()}}
+        </div>
+        <div ng-hide="model.current.asMilliseconds() > 0">
+          {{model.break.minutes()}}.{{model.break.seconds()}}
+        </div>
+        <div class="glyphicon glyphicon-{{(model.timerState==='PAUSED' || !model.timerState) ? 'play' : 'stop'}}"></div>
+      </md-button>
+    </div>
+    <div>
+      <nvd3-pie-chart
+        id="timer"
+        data="model.timerDisplay"
+        ng-model="model.timerDisplay"
+        x="xFunction()"
+        y="yFunction()"
+        margin="{left:0,top:0,bottom:0,right:0}"
+        height="280"
+        width="280"
+        color="colorFunction()">
+        <svg></svg>
+      </nvd3-pie-chart>
+    </div>
+  </div>
+  <md-button class="btn btn-success" ng-show="showComplete" ng-click="completePomo()">Complete</md-button>
 </div>
