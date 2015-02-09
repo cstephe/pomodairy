@@ -1,0 +1,52 @@
+<div class="timer-section" ng-class="{'no-active-task':!activeWorkItem}">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div>
+        {{timer.model.current.asMilliseconds()>0 ? (activeWorkItem.name || "No Assigned Task") : "Break Time"}}
+      </div>
+    </div>
+  </md-toolbar>
+  <div id="timerContainer" layout="column">
+    <div class="time-digits">
+      <md-button class="md-fab md-accent timer-button"
+                 aria-label="Start Task"
+                 ng-hide="showComplete"
+                 ng-disabled="!activeWorkItem"
+                 ng-click="toggleTimer()">
+          <div ng-show="timer.model.current.asMilliseconds() > 0">
+            {{timer.model.current.minutes()}}.{{timer.model.current.seconds()}}
+          </div>
+          <div ng-hide="timer.model.current.asMilliseconds() > 0">
+            {{timer.model.break.minutes()}}.{{timer.model.break.seconds()}}
+          </div>
+          <div
+            class="{{(timer.model.timerState==='PAUSED' || !timer.model.timerState) ? 'fa fa-play' : 'fa fa-times'}}"></div>
+      </md-button>
+      <md-button class="md-fab md-accent timer-button" aria-label="Pomo Complete choose action"  ng-show="showComplete">
+        <div layout="row" ng-show="showComplete" layout-align="center center">
+          <md-button aria-label="Complete Pomo"  flex>
+            <i class="fa fa-check" ng-click="completePomo()"></i>
+          </md-button>
+          <md-button aria-label="Abandon Pomo" flex>
+            <i flex class="fa fa-times" ng-click="cancelPomo()"></i>
+          </md-button>
+        </div>
+      </md-button>
+    </div>
+    <div>
+      <nvd3-pie-chart
+        id="timer"
+        data="timer.model.timerDisplay"
+        ng-model="timer.model.timerDisplay"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        margin="{left:0,top:0,bottom:0,right:0}"
+        height="280"
+        width="280"
+        color="colorFunction()">
+        <svg></svg>
+      </nvd3-pie-chart>
+    </div>
+  </div>
+</div>

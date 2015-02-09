@@ -2,7 +2,6 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $fa-font-path:   "../bower_components/components-font-awesome/fonts";
 // bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 @import "components-font-awesome/scss/font-awesome.scss";
 // endbower
 
@@ -14,6 +13,21 @@ $fa-font-path:   "../bower_components/components-font-awesome/fonts";
     fill:grey;
   }
 }
+.task-details > div{
+  line-height: 53px;
+}
+.new-task-area{
+  transition: height 0.3s linear;
+  height: 0;
+  overflow: hidden;
+  &.is-open{
+     height:470px;
+  }
+}
+
+.timer-button .fa{
+  font-size:50px;
+}
 
 [ng-click]{
   cursor:pointer;
@@ -21,9 +35,54 @@ $fa-font-path:   "../bower_components/components-font-awesome/fonts";
 .md-paginator {
   margin-right: 0px;
 }
+.md-grid .fa{
+  font-size: 24px;
+}
+.badge{
+  border-radius: 25px;
+  background-color: #808080;
+  padding: 2px 7px;
+  font-size: .8em;
+  color: #ffffff;
+}
+.md-toolbar-tools > div{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.align-right{
+  text-align: right;
+}
 svg {
   width: auto;
   height: auto;
+}
+.md-subheader{
+  md-switch{
+    margin:0;
+    margin-top: -6px;
+  }
+}
+.nav-container{
+  .fa{
+    font-size:1.5em;
+  }
+  .tab-icon{
+    position: relative;
+    width:40px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    .badge{
+      font-size: 0.8em;
+      position: absolute;
+      top: 10px;
+      left: 21px;
+    }
+  }
+  .md-grid-text{
+    font-size: 0.8em;
+  }
 }
 
 #timerContainer{
@@ -32,8 +91,15 @@ svg {
     display: block;
     margin:auto;
   }
-  .glyphicon{
+  .glyphicon, .fa{
     font-size:2em;
+  }
+  .timer-buttons{
+    button{
+      font-size: 2em;
+      height: 70px;
+      width: 70px;
+    }
   }
   .timer-button{
     font-size:2em;

@@ -1,0 +1,29 @@
+<div layout-gt-sm="row" layout-sm="column">
+    <div flex>
+        <ng-include src="'scripts/modules/today/timer.html'"></ng-include>
+    </div>
+    <div flex>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <div>Today's Tasks</div>
+        </div>
+      </md-toolbar>
+      <md-subheader>
+        <div layout="row">
+          <div flex>Done in about {{timeLeft()}}</div>
+          <div flex class="align-right">Completed Today: {{completedToday()}}</div>
+        </div>
+      </md-subheader>
+      <md-content>
+        <md-list layout="column">
+          <md-item flex ng-repeat="workItem in (taskList | workItems | taggedItems) | orderBy:worklistOrder">
+            <md-item-content layout="row" flex ng-include="'scripts/modules/today/workItem.html'"></md-item-content>
+            <md-divider ng-if="!$last" class="ng-scope md-default-theme"></md-divider>
+          </md-item>
+        </md-list>
+        <md-content layout-margin ng-show="workListItems.length < 1">
+          <p>No items in your todo list, select or create ones in your <a ui-sref="tasks">inventory</a>.</p>
+        </md-content>
+      </md-content>
+    </div>
+</div>

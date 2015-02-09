@@ -1,0 +1,22 @@
+<div layout="row" flex class="md-tile-content task-container">
+  <div flex class="task-details" ng-click="editTask($event, task)" on-long-press="longpress()">
+    <div>
+      <span class="badge">{{task.pomos}}</span>
+      <span>{{task.name}}</span>
+    </div>
+  </div>
+  <div class="task-actions md-tile-right" layout="row">
+    <md-button flex
+               class="md-warn"
+               type="button"
+               ng-click="removeTask($event, task)"><i class="fa fa-trash"></i>
+    </md-button>
+    <md-checkbox flex
+                 class="md-primary"
+                 name="inWorkList"
+                 ng-model="task.inWorkList"
+                 ng-change="workTask(task)"
+                 aria-label="Add to work list">Work
+    </md-checkbox>
+  </div>
+</div>

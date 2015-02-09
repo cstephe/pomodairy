@@ -23,7 +23,16 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
+    ngtemplates: {
+      app: {
+        options:{
+          module: 'pomodairyApp'
+        },
+        cwd: 'app',
+        src: ['views/**.html', 'scripts/modules/{,*/}*.html'],
+        dest: 'app/scripts/templates.js'
+      }
+    },
     ngdocs: {
       all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
     },
@@ -170,12 +179,12 @@ module.exports = function (grunt) {
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
-      karma:{
+      karma: {
         devDependencies: true,
         src: 'karma.conf.js',
-        ignorePath:  /\.\.\//,
+        ignorePath: /\.\.\//,
         fileTypes: {
           js: {
             block: /(([\s\t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
@@ -259,7 +268,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
       }
     },
 
@@ -352,6 +361,28 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      dev:{
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            '**/*',
+          ]
+        },{
+          expand: true,
+          cwd: '.',
+          src: 'bower_components/**/*',
+          dest: '<%= yeoman.dist %>'
+        },
+          {
+            expand: true,
+            cwd: '.tmp/styles',
+            dest: '<%= yeoman.dist %>/styles',
+            src: ['*.css']
+          }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -362,7 +393,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
+            'sounds/*',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
@@ -376,13 +407,12 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
-        },
-          {
+        }, {
             expand: true,
             cwd: '.',
             src: 'bower_components/components-font-awesome/fonts/*',
             dest: '<%= yeoman.dist %>'
-          }]
+        }]
       },
       styles: {
         expand: true,
@@ -417,7 +447,6 @@ module.exports = function (grunt) {
   });
 
 
-
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -426,6 +455,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'ngtemplates',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -463,9 +493,18 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
+  grunt.registerTask('build-dev', [
+    'clean:dist',
+    'wiredep',
+    'ngtemplates',
+    'concurrent:dist',
+    'copy:dev'
+  ]);
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'ngtemplates',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -477,6 +516,11 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('build-all', [
+    'build',
+
   ]);
 
   grunt.registerTask('default', [

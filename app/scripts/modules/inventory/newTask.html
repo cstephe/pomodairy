@@ -1,0 +1,50 @@
+<div layout="column" ng-controller="taskDataController">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div>{{editBox.title || "New Task"}}</div>
+    </div>
+  </md-toolbar>
+  <div flex layout-margin>
+    <form ng-submit="addTask()" name="newTaskForm" role="form">
+      <md-input-container>
+        <label>Name</label>
+        <input name="taskName" required type="text" ng-model="newTask.name"
+               md-maxlength="60">
+        <div ng-messages="newTaskForm.taskName.$error" ng-show="newTaskForm.taskName.$dirty">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The name has to be less than 60 characters long.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Pomodairies</label>
+        <input name="pomoCount" required type="number" ng-model="newTask.pomos" min="0" max="99" step="1">
+        <div ng-messages="newTaskForm.pomoCount.$error" ng-show="newTaskForm.pomoCount.$dirty">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="min">Must be a positive value</div>
+          <div ng-message="max">Must be less than 100</div>
+          <div ng-message="number">Must be a number</div>
+          <div ng-message="integer">Must be a whole number</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Tags</label>
+        <input name="tags" ng-model="newTask.tags" md-maxlength="60">
+        <div ng-messages="newTaskForm.tags.$error" ng-show="newTaskForm.tags.$dirty">
+          <div ng-message="md-maxlength">Tags must be less than 60 characters long.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Description</label>
+        <textarea name="description" ng-model="newTask.description" rows="2" md-maxlength="150"></textarea>
+        <div ng-messages="newTaskForm.pomoCount.$error" ng-show="newTaskForm.pomoCount.$dirty">
+          <div ng-message="md-maxlength">The name has to be less than 150 characters long.</div>
+        </div>
+      </md-input-container>
+      <div layout="row">
+        <md-button type="button" class="md-default" ng-click="closeDialog()">Close</md-button>
+        <div flex></div>
+        <md-button type="submit" class="md-raised md-primary">{{isEdit?'Update':'Add'}}</md-button>
+      </div>
+    </form>
+  </div>
+</div>

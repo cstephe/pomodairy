@@ -1,0 +1,14 @@
+<div layout="row" flex class="md-tile-content" ng-class="{'active-task':workItem.active}">
+  <div flex class="task-details">
+    <span class="badge">{{workItem.completed.length || 0}}/{{workItem.pomos || 0}}</span>
+    <span>{{workItem.name}}</span>
+  </div>
+  <div class="task-actions md-tile-right">
+    <div class="btn-group">
+      <md-button type="button" class="md-raised md-primary"
+                 ng-click="startWorkOnItem($event, workItem)">
+        {{(activeWorkItem && workItem.id === activeWorkItem.id) ? 'Complete' : 'Work'}}
+      </md-button>
+    </div>
+  </div>
+</div>

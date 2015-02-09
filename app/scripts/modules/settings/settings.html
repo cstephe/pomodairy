@@ -1,5 +1,11 @@
 <md-content class="md-padding">
 <form>
+  <div>
+    <select ng-model="model.showTag" ng-disabled="!allTags.length" ng-options="tag for tag in allTags">
+      <option value="">All Tasks</option>
+    </select>
+    Tag Filter
+  </div>
   <md-checkbox ng-model="model.strict" aria-label="Finished?">
     Strict Mode
   </md-checkbox>
@@ -18,5 +24,6 @@
   <md-checkbox ng-model="model.cloudEnabled" aria-label="Finished?">
     Sync Tasks
   </md-checkbox>
+</form>
 </form>
 </md-content>

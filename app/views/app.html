@@ -1,0 +1,30 @@
+<div class="nav-container">
+  <md-tabs class="md-hue-1"  md-selected="selectedItemIndex">
+    <md-tab  label="Today" ui-sref="app.today">
+      <md-tab-label type="button" layout-sm="column" layout-gt-sm="row" layout-align="center center">
+        <div class="tab-icon">
+          <i class="fa fa-home"></i> <span class="badge">{{((model.taskList | taggedItems) | workItems).length}}</span>
+        </div>
+        <div class="md-grid-text"> Today </div>
+      </md-tab-label>
+      <ng-include src="'scripts/modules/today/todayPage.html'"
+                  ng-controller="TimerCtrl"></ng-include>
+    </md-tab>
+    <md-tab label="Inventory" ui-sref="app.tasks">
+      <md-tab-label type="button" layout-sm="column" layout-gt-sm="row" layout-align="center center">
+        <div class="tab-icon"><i class="fa fa-list"></i><span class="badge">{{((model.taskList |  taggedItems) | openItems).length}}</span></div>
+        <div class="md-grid-text"> Inventory </div>
+      </md-tab-label>
+      <ng-include src="'scripts/modules/inventory/tasks.html'"
+                  ng-controller="InventoryCtrl"></ng-include>
+    </md-tab>
+    <md-tab label="Settings" ui-sref="app.settings">
+      <md-tab-label type="button" layout-sm="column" layout-gt-sm="row" layout-align="center center">
+        <div class="tab-icon"><i class="fa fa-gear"></i></div>
+        <div class="md-grid-text"> Settings </div>
+      </md-tab-label>
+      <ng-include src="'scripts/modules/settings/settings.html'"
+                  ng-controller="SettingsCtrl"></ng-include>
+    </md-tab>
+  </md-tabs>
+</div>

@@ -1,0 +1,44 @@
+<md-content>
+  <div class="new-task-area" ng-class="{'is-open':model.openNewTask}">
+    <div ng-include="'scripts/modules/inventory/newTask.html'"></div>
+  </div>
+  <md-content class="md-raised">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <div>
+          Inventory
+        </div>
+      </div>
+      <md-button class="md-fab md-fab-top-right md-accent new-task-fab" aria-label="New Task"
+                 ng-click="showTaskEdit($event)">
+        <i class="fa fa-plus" style="font-size:24px"></i>
+      </md-button>
+    </md-toolbar>
+    <md-content flex class="md-raised">
+      <section>
+        <md-subheader>
+          <div layout="row">
+            <div>
+              <md-switch ng-model="showCompleted">
+                {{showCompleted?"All Tasks":"Open Tasks"}}
+              </md-switch>
+            </div>
+            <div flex class="align-right">Done in about {{timeLeft()}}</div>
+          </div>
+        </md-subheader>
+        <md-list layout="column">
+          <md-item flex
+                   ng-repeat="task in inventoryItems = (model.taskList | taggedItems | openItems:showCompleted) | orderBy:taskOrder">
+            <md-item-content layout="row" flex ng-include="'scripts/modules/inventory/inventoryItem.html'"></md-item-content>
+            <md-divider ng-if="!$last"></md-divider>
+          </md-item>
+          <md-item ng-show="inventoryItems.length < 1">
+            <md-item-content layout="row" layout-margin flex>
+              <p>No Items In Your Inventory</p>
+            </md-item-content>
+          </md-item>
+        </md-list>
+      </section>
+    </md-content>
+  </md-content>
+</md-content>
