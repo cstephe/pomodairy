@@ -42,7 +42,7 @@ angular.module('pomodairyApp').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('scripts/modules/inventory/inventoryItem.html',
     "<div layout=\"row\" flex class=\"md-tile-content task-container\">\n" +
-    "  <div flex class=\"task-details\" ng-click=\"editTask($event, task)\" on-long-press=\"longpress()\">\n" +
+    "  <div flex class=\"task-details\">\n" +
     "    <div>\n" +
     "      <span class=\"badge\">{{task.pomos}}</span>\n" +
     "      <span>{{task.name}}</span>\n" +
@@ -50,9 +50,9 @@ angular.module('pomodairyApp').run(['$templateCache', function($templateCache) {
     "  </div>\n" +
     "  <div class=\"task-actions md-tile-right\" layout=\"row\">\n" +
     "    <md-button flex\n" +
-    "               class=\"md-warn\"\n" +
+    "               class=\"md-default\"\n" +
     "               type=\"button\"\n" +
-    "               ng-click=\"removeTask($event, task)\"><i class=\"fa fa-trash\"></i>\n" +
+    "               ng-click=\"editTask($event, task)\"><i class=\"fa fa-edit\"></i>\n" +
     "    </md-button>\n" +
     "    <md-checkbox flex\n" +
     "                 class=\"md-primary\"\n" +
@@ -109,9 +109,14 @@ angular.module('pomodairyApp').run(['$templateCache', function($templateCache) {
     "          <div ng-message=\"md-maxlength\">The name has to be less than 150 characters long.</div>\n" +
     "        </div>\n" +
     "      </md-input-container>\n" +
-    "      <div layout=\"row\">\n" +
-    "        <md-button type=\"button\" class=\"md-default\" ng-click=\"closeDialog()\">Close</md-button>\n" +
+    "      <div layout=\"row\" layout-margin>\n" +
+    "        <md-button ng-show=\"newTask.id\"\n" +
+    "          class=\"md-warn\"\n" +
+    "          type=\"button\"\n" +
+    "          ng-click=\"removeTask($event, task)\">Delete\n" +
+    "        </md-button>\n" +
     "        <div flex></div>\n" +
+    "        <md-button type=\"button\" class=\"md-default\" ng-click=\"closeDialog()\">Cancel</md-button>\n" +
     "        <md-button type=\"submit\" class=\"md-raised md-primary\">{{isEdit?'Update':'Add'}}</md-button>\n" +
     "      </div>\n" +
     "    </form>\n" +
@@ -151,9 +156,17 @@ angular.module('pomodairyApp').run(['$templateCache', function($templateCache) {
     "        </md-subheader>\n" +
     "        <md-list layout=\"column\">\n" +
     "          <md-item flex\n" +
-    "                   ng-repeat=\"task in inventoryItems = (model.taskList | taggedItems | openItems:showCompleted) | orderBy:taskOrder\">\n" +
-    "            <md-item-content layout=\"row\" flex ng-include=\"'scripts/modules/inventory/inventoryItem.html'\"></md-item-content>\n" +
-    "            <md-divider ng-if=\"!$last\"></md-divider>\n" +
+    "                   ng-drop=\"true\" ng-drop-success=\"onDropComplete(task, $data, $event)\"\n" +
+    "                   ng-repeat=\"task in inventoryItems = (model.taskList | taggedItems | openItems:showCompleted)\">\n" +
+    "          <md-item-content layout=\"row\" flex ng-include=\"'scripts/modules/inventory/inventoryItem.html'\"\n" +
+    "                           ng-drag=\"true\" ng-drag-data=\"task\"\n" +
+    "                           ng-center-anchor=\"true\">\n" +
+    "          </md-item-content>\n" +
+    "          <md-divider ng-if=\"!$last\"></md-divider>\n" +
+    "          </md-item>\n" +
+    "          <md-item flex class=\"empty-drop-area\" ng-show=\"inventoryItems.length > 1\"\n" +
+    "                   ng-drop=\"true\" ng-drop-success=\"onDropComplete(null, $data, $event)\">\n" +
+    "            <md-item-content layout=\"row\" flex></md-item-content>\n" +
     "          </md-item>\n" +
     "          <md-item ng-show=\"inventoryItems.length < 1\">\n" +
     "            <md-item-content layout=\"row\" layout-margin flex>\n" +
@@ -276,7 +289,7 @@ angular.module('pomodairyApp').run(['$templateCache', function($templateCache) {
     "      </md-subheader>\n" +
     "      <md-content>\n" +
     "        <md-list layout=\"column\">\n" +
-    "          <md-item flex ng-repeat=\"workItem in (taskList | workItems | taggedItems) | orderBy:worklistOrder\">\n" +
+    "          <md-item flex ng-repeat=\"workItem in (taskList | workItems | taggedItems)\">\n" +
     "            <md-item-content layout=\"row\" flex ng-include=\"'scripts/modules/today/workItem.html'\"></md-item-content>\n" +
     "            <md-divider ng-if=\"!$last\" class=\"ng-scope md-default-theme\"></md-divider>\n" +
     "          </md-item>\n" +

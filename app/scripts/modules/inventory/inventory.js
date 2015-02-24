@@ -1,8 +1,8 @@
 'use strict';
 (function (window, angular) {
   angular.module('taskListModule', [])
-    .controller('taskDataController', ['$scope', 'uuid',
-      function ($scope, uuid) {
+    .controller('taskDataController', ['$scope', 'uuid', 'osShell',
+      function ($scope, uuid, osShell) {
         $scope.$watch('model.newTask', function (newVal, oldVal) {
           if(newVal !== oldVal){
             $scope.isEdit = $scope.model.newTask;
@@ -16,6 +16,15 @@
         });
         $scope.closeDialog = function () {
           $scope.model.openNewTask = false;
+        };
+        $scope.removeTask = function (event) {
+          osShell.confirm(event, "Confirm Delete",
+            $scope.model.newTask.completed && "This task has recorded progress are you sure you want to delete it?")
+            .then(function () {
+              var index = $scope.model.taskList.indexOf($scope.model.newTask);
+              $scope.model.taskList.splice(index, 1);
+              $scope.model.openNewTask = false;
+            });
         };
         $scope.addTask = function () {
           if ($scope.newTask.id) {
@@ -37,8 +46,22 @@
           newTask: {}
         };
         $scope.timeLeft = function () {
-          //var workItems = $filter('workItems')($scope.model.taskList);
-          //return taskUtils.timeLeft(workItems);
+          var workItems = $filter('workItems')($scope.model.taskList);
+          return taskUtils.timeLeft(workItems);
+        };
+        $scope.onDropComplete = function (dropData, obj, evt) {
+          var otherIndex = $scope.model.taskList.indexOf(obj);
+          $scope.model.taskList.splice(otherIndex, 1);
+          if(dropData){
+            var dropIndex = $scope.model.taskList.indexOf(dropData);
+            $scope.model.taskList.splice(dropIndex, 0, obj);
+          }else{
+            $scope.model.taskList.push(obj);
+          }
+          console.log(_.pluck($scope.model.taskList, "name"))
+        };
+        $scope.onDragComplete = function(){
+          console.log("drag done");
         };
         $scope.openNewTask = false;
         $scope.showTaskEdit = function (ev, task) {
@@ -59,14 +82,6 @@
           } else {
             task.workAddedDate = null;
           }
-        };
-        $scope.removeTask = function (event, task) {
-          osShell.confirm(event, "Confirm Delete",
-            task.completed && "This task has recorded progress are you sure you want to delete it?")
-            .then(function () {
-              var index = modelService.taskList.indexOf(task);
-              modelService.taskList.splice(index, 1);
-            });
         };
         $scope.editTask = function (event, task) {
           $scope.showTaskEdit(event, task);

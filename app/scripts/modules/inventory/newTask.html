@@ -40,9 +40,14 @@
           <div ng-message="md-maxlength">The name has to be less than 150 characters long.</div>
         </div>
       </md-input-container>
-      <div layout="row">
-        <md-button type="button" class="md-default" ng-click="closeDialog()">Close</md-button>
+      <div layout="row" layout-margin>
+        <md-button ng-show="newTask.id"
+          class="md-warn"
+          type="button"
+          ng-click="removeTask($event, task)">Delete
+        </md-button>
         <div flex></div>
+        <md-button type="button" class="md-default" ng-click="closeDialog()">Cancel</md-button>
         <md-button type="submit" class="md-raised md-primary">{{isEdit?'Update':'Add'}}</md-button>
       </div>
     </form>

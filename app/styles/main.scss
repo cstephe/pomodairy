@@ -5,6 +5,12 @@ $fa-font-path:   "../bower_components/components-font-awesome/fonts";
 @import "components-font-awesome/scss/font-awesome.scss";
 // endbower
 
+$accent-color: rgb(55, 71, 79);
+
+body{
+  user-select: none;
+}
+
 .btn.timer-button, {
   border-width: 1px;
 }
@@ -84,7 +90,20 @@ svg {
     font-size: 0.8em;
   }
 }
-
+[ng-drag] {
+  cursor: move;
+}
+[ng-drag].dragging {
+  opacity: 0.5;
+  width: 100%;
+  display: block;
+}
+[ng-drop].empty-drop-area{
+  height:100px;
+}
+[ng-drop].drag-enter {
+  border-top: solid 100px $accent-color;
+}
 #timerContainer{
   position: relative;
   svg{

@@ -9,23 +9,11 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"WebViewDebug\"><param name=\"android-package\" value=\"com.jamiestarke.webviewdebug.WebViewDebug\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
                             "count": 1
                         },
                         {
@@ -37,6 +25,22 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
                             "count": 1
                         }
@@ -45,6 +49,20 @@
             },
             "AndroidManifest.xml": {
                 "parents": {
+                    "/manifest/application": [
+                        {
+                            "xml": "<receiver android:name=\"de.appplant.cordova.plugin.localnotification.Receiver\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"de.appplant.cordova.plugin.localnotification.Restore\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ReceiverActivity\" />",
+                            "count": 1
+                        }
+                    ],
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
@@ -72,39 +90,34 @@
                             "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
                             "count": 1
                         }
-                    ],
-                    "/manifest/application": [
-                        {
-                            "xml": "<receiver android:name=\"de.appplant.cordova.plugin.localnotification.Receiver\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:name=\"de.appplant.cordova.plugin.localnotification.Restore\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ReceiverActivity\" />",
-                            "count": 1
-                        }
                     ]
                 }
             }
         }
     },
     "installed_plugins": {
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.pomodairy.app"
+        },
         "com.jamiestarke.webviewdebug": {
+            "PACKAGE_NAME": "com.pomodairy.app"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.pomodairy.app"
+        },
+        "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.pomodairy.app"
         },
         "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "com.pomodairy.app"
         },
-        "org.apache.cordova.splashscreen": {
+        "org.apache.cordova.file": {
             "PACKAGE_NAME": "com.pomodairy.app"
         },
         "org.apache.cordova.media": {
             "PACKAGE_NAME": "com.pomodairy.app"
         },
-        "de.appplant.cordova.plugin.local-notification": {
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.pomodairy.app"
         },
         "org.apache.cordova.vibration": {
@@ -112,9 +125,6 @@
         }
     },
     "dependent_plugins": {
-        "org.apache.cordova.file": {
-            "PACKAGE_NAME": "com.pomodairy.app"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.pomodairy.app"
         }

@@ -28,9 +28,17 @@
         </md-subheader>
         <md-list layout="column">
           <md-item flex
-                   ng-repeat="task in inventoryItems = (model.taskList | taggedItems | openItems:showCompleted) | orderBy:taskOrder">
-            <md-item-content layout="row" flex ng-include="'scripts/modules/inventory/inventoryItem.html'"></md-item-content>
-            <md-divider ng-if="!$last"></md-divider>
+                   ng-drop="true" ng-drop-success="onDropComplete(task, $data, $event)"
+                   ng-repeat="task in inventoryItems = (model.taskList | taggedItems | openItems:showCompleted)">
+          <md-item-content layout="row" flex ng-include="'scripts/modules/inventory/inventoryItem.html'"
+                           ng-drag="true" ng-drag-data="task"
+                           ng-center-anchor="true">
+          </md-item-content>
+          <md-divider ng-if="!$last"></md-divider>
+          </md-item>
+          <md-item flex class="empty-drop-area" ng-show="inventoryItems.length > 1"
+                   ng-drop="true" ng-drop-success="onDropComplete(null, $data, $event)">
+            <md-item-content layout="row" flex></md-item-content>
           </md-item>
           <md-item ng-show="inventoryItems.length < 1">
             <md-item-content layout="row" layout-margin flex>

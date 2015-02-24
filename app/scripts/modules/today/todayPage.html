@@ -16,7 +16,7 @@
       </md-subheader>
       <md-content>
         <md-list layout="column">
-          <md-item flex ng-repeat="workItem in (taskList | workItems | taggedItems) | orderBy:worklistOrder">
+          <md-item flex ng-repeat="workItem in (taskList | workItems | taggedItems)">
             <md-item-content layout="row" flex ng-include="'scripts/modules/today/workItem.html'"></md-item-content>
             <md-divider ng-if="!$last" class="ng-scope md-default-theme"></md-divider>
           </md-item>

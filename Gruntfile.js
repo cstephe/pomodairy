@@ -63,6 +63,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      templates:{
+        files:['<%= yeoman.app %>/{,**/}*.html'],
+        tasks:['ngtemplates']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'

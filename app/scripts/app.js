@@ -6,6 +6,7 @@ angular.module('pomodairyApp', [
   'ngResource',
   'ngSanitize',
   'ngStorage',
+  'ngDraggable',
   'ngMaterial',
   'ngMessages',
   'ui.router',
